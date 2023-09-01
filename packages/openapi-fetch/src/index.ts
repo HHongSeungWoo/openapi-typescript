@@ -62,7 +62,7 @@ export default function createClient<Paths extends {}>(clientOptions: ClientOpti
 
     // handle empty content
     // note: we return `{}` because we want user truthy checks for `.data` or `.error` to succeed
-    if (response.status === 204 || response.headers.get("Content-Length") === "0") {
+    if (response.status === 204 || response.headers.get("Content-Length") === "0" || !response.headers.get("Content-Length")) {
       return response.ok ? { data: {} as any, response: response as any } : { error: {} as any, response: response as any };
     }
 
